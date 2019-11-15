@@ -1,0 +1,56 @@
+service: serverless-event
+app: serverless-event
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 128
+  timeout: 30
+
+functions:
+
+  getEvent:
+    handler: handler.getEvent
+    events:
+     - http:
+         path: event/{id}
+         method: get
+         cors: true
+          
+  getAllEvents:
+    handler: handler.getAllEvents
+    events:
+     - http:
+         path: event
+         method: get
+         cors: true
+
+  createEvent:
+    handler: handler.createEvent
+    events:
+      - http:
+          path: event
+          method: post
+          cors: true
+              
+  updateEvent:
+    handler: handler.updateEvent
+    events:
+      - http:
+          path: event/{id}
+          method: put
+          cors: true
+          
+  deleteEvent:
+    handler: handler.deleteEvent
+    events:
+      - http:
+          path: event/{id}
+          method: delete
+          cors: true    
+            
+plugins:
+  - serverless-offline
+         
+  
+      
